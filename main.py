@@ -47,8 +47,8 @@ def delete_dir(path: str) -> None:
 
 def main():
     args = sys.argv
-    filter_word = args[1]
-    original_pdf = args[2]
+    original_pdf = args[1]
+    filter_word = args[2]
     new_pdf_name = "new.pdf"
     tmp = "tmp/"
 
