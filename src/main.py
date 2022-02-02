@@ -1,8 +1,11 @@
-import sys
+from sre_constants import SUCCESS
 import os
 import glob
+
 import PyPDF2
 from pdfminer.high_level import extract_text
+
+import fire
 
 
 def get_file_name(path: str) -> str:
@@ -45,19 +48,28 @@ def delete_dir(path: str) -> None:
     os.rmdir(path)
 
 
-def main():
-    args = sys.argv
-    original_pdf = args[1]
-    filter_word = args[2]
-    new_pdf_name = "new.pdf"
+def main(original_pdf: str, filter_word: str, new_pdf: str = "new.pdf") -> None:
+    """
+    Extract only the pages containing the keywords from the PDF files in the specified path.
+
+    Parameters
+    ----------
+    original_pdf: str
+        original pdf path
+    filter_word: str
+        extract pages if page contains this word
+    new_pdf: str
+        new extracted pdf's path or file name
+    """
     tmp = "tmp/"
 
     split_pages(original_pdf, tmp)
     filter_pages(tmp, filter_word)
-    merge_pages(tmp, new_pdf_name)
+    merge_pages(tmp, new_pdf)
 
     delete_dir(tmp)
+    exit(SUCCESS)
 
 
-if __name__ == "__main__":
-    main()
+def dummy_main():
+    fire.Fire(main)

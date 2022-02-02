@@ -1,5 +1,7 @@
 # venv
-.env/
+.venv/
+*.egg-info/
+build/
 
 # test pdfs
 *.pdf
